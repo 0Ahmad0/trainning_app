@@ -22,7 +22,7 @@ signupCompany(
     required String email,
     required String password,
     required String name,
-    required String interestValue,
+    required String interest,
     required String state,
     bool? isFromAdmin,
     required BuildContext context}) {
@@ -38,7 +38,7 @@ signupCompany(
       'name': name,
       'user_type': '2',
       'image': '',
-      'interestValue':interestValue,
+      'interest':interest,
       'state':state,
       'count':'0'
     }).then((value) async {

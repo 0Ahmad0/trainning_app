@@ -309,7 +309,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                                         context: context,
                                         info: infoController.text,
                                         name: nameController.text,
-                                        interestValue: interestValue,
+                                        interest: interestValue,
                                         state: state,
                                     isFromAdmin: true);
                                   }

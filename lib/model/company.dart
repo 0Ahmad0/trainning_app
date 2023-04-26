@@ -7,7 +7,7 @@ class Company {
   var rating;
   var email;
   var info;
-  var interestValue;
+  var interest;
   var state;
   var image;
   Company({this.name, this.description, this.location, this.rating});
@@ -18,7 +18,7 @@ class Company {
     location = json['location'];
     rating = json['rating'];
     info = json['info'];
-    interestValue = json['interestValue'];
+    interest = json['interest'];
     state = json['state'];
     image = json['image'];
   }

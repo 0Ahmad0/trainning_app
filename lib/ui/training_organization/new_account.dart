@@ -306,7 +306,7 @@ class _NewOrganizationAccountState extends State<NewOrganizationAccount> {
                                         context: context,
                                         info: infoController.text,
                                         name: nameController.text,
-                                      interestValue: interestValue,
+                                        interest: interestValue,
                                       state: state
                                     );
                                   }

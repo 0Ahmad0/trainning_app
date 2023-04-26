@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:training_app/ui/auth/login_screen.dart';
 import 'package:training_app/ui/onBoarding/onboarding_screen.dart';
 import 'package:training_app/ui/splash_screen.dart';
 import 'package:training_app/ui/student/chatbot_screen.dart';
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
           // home: ProfileScreen(),
           //  home: AddNewCompany(),
           //  home: AddNewCompany(),
-           home: StudentHome(),
+           home: LoginScreen(),
         );
       }),
     );
