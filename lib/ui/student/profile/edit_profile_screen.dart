@@ -22,10 +22,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController phoneController = TextEditingController();
   var email ="";
   var name ="";
+  var img ="";
 @override
   void initState() {
   name = SharedPreferencesHelper.sharedPreferences!.getString("name")!;
   email = SharedPreferencesHelper.sharedPreferences!.getString("email")!;
+  img = StudentController.student.img;
   super.initState();
 
 }
@@ -103,9 +105,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   }
                                 });
                               },
-                              child: isImageSelected==false?SizedBox(
-                                height: MediaQuery.of(context).size.height / 7,
-                                child: Image.asset('assets/profile_pic.png'),
+                              child: isImageSelected==false?(
+                                  img!=null? SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(img),
+                                      )
+                                  )
+                                      :
+                                      SizedBox(
+                                      height: MediaQuery.of(context).size.height / 7,
+                                  child: Image.asset('assets/profile_pic.png'),
+                                )
+
                               ):SizedBox(
                                 height: 90,
                                 width: 90,
