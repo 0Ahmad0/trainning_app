@@ -22,6 +22,8 @@ signupCompany(
     required String email,
     required String password,
     required String name,
+    required String interestValue,
+    required String state,
     bool? isFromAdmin,
     required BuildContext context}) {
   FirebaseAuth.instance
@@ -36,6 +38,8 @@ signupCompany(
       'name': name,
       'user_type': '2',
       'image': '',
+      'interestValue':interestValue,
+      'state':state,
       'count':'0'
     }).then((value) async {
       await SharedPreferencesHelper.sharedPreferences!.setString('name', name);

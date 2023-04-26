@@ -6,14 +6,27 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/custom_button.dart';
 
-class AddNewCompany extends StatelessWidget {
+class AddNewCompany extends StatefulWidget {
    AddNewCompany({Key? key}) : super(key: key);
 
+  @override
+  State<AddNewCompany> createState() => _AddNewCompanyState();
+}
+
+class _AddNewCompanyState extends State<AddNewCompany> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   TextEditingController infoController = TextEditingController();
+
   TextEditingController nameController = TextEditingController();
+
   TextEditingController numberController = TextEditingController();
+
+   String interestValue = 'Information Technology';
+
+   String state = '0';
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +89,7 @@ class AddNewCompany extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height / 1.5,
+                  //  height: MediaQuery.of(context).size.height / 1.5,
                     width: double.infinity,
                     color: lightGrey,
                     child: Padding(
@@ -128,6 +141,149 @@ class AddNewCompany extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
+                            height: 25,
+                          ),
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.jobInterest,
+                                  style: TextStyle(color: textColor),
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                          value: AppLocalizations.of(context)!
+                                              .informationTechnology,
+                                          groupValue: interestValue,
+                                          onChanged: (v) {
+                                            setState(() {
+                                              interestValue = v.toString();
+                                              state = '0';
+                                            });
+                                          }),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .informationTechnology,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                        value:AppLocalizations.of(context)!.accountingAndFinance,
+                                        groupValue: interestValue,
+                                        onChanged: (v) {
+                                          setState(() {
+                                            interestValue = v.toString();
+                                            state = '1';
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!.accountingAndFinance,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                        value: AppLocalizations.of(context)!.healthCare,
+                                        groupValue: interestValue,
+                                        onChanged: (v) {
+                                          setState(() {
+                                            interestValue = v.toString();
+                                            state = '2';
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!.healthCare,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                        value: AppLocalizations.of(context)!
+                                            .engineeringAndManufacturing,
+                                        groupValue: interestValue,
+                                        onChanged: (v) {
+                                          setState(() {
+                                            interestValue = v.toString();
+                                            state = '3';
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .engineeringAndManufacturing,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                          value: AppLocalizations.of(context)!.media,
+                                          groupValue: interestValue,
+                                          onChanged: (v) {
+                                            setState(() {
+                                              interestValue = v.toString();
+                                              state = '4';
+                                            });
+                                          }),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!.media,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Radio(
+                                          value: AppLocalizations.of(context)!
+                                              .scienceAndPharmaceuticals,
+                                          groupValue: interestValue,
+                                          onChanged: (v) {
+                                            setState(() {
+                                              interestValue = v.toString();
+                                              state = '5';
+                                            });
+                                          }),
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .scienceAndPharmaceuticals,
+                                      style: TextStyle(color: textColor, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
                             height: 20,
                           ),
                           SizedBox(
@@ -153,6 +309,8 @@ class AddNewCompany extends StatelessWidget {
                                         context: context,
                                         info: infoController.text,
                                         name: nameController.text,
+                                        interestValue: interestValue,
+                                        state: state,
                                     isFromAdmin: true);
                                   }
 

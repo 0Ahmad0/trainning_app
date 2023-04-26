@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_app/controllers/shared_preference_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:training_app/controllers/student_controller.dart';
 import 'package:training_app/model/company.dart';
 import 'package:training_app/ui/auth/login_screen.dart';
 import 'package:training_app/ui/training_organization/main_organization_screen.dart';
@@ -128,6 +129,7 @@ signInWithEmailAndPassword(
         if (value.exists) {
           if (value['user_type'] == '1') {
             Student student = Student.fromJson(value.data()!);
+            StudentController.student=student;
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('name', student.name);
             await SharedPreferencesHelper.sharedPreferences!

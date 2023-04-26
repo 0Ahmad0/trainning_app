@@ -3,6 +3,7 @@ class Student {
   String? password;
   var name;
   var interest;
+  var state;
   String? phone;
   String? isSendRequest;
   var level;
@@ -20,6 +21,7 @@ class Student {
   Student.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     interest = json['interest'];
+    state = json['state'];
     isSendRequest = json['isSendRequest'];
     level = json['level'];
     language = json['language'];

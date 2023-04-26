@@ -44,8 +44,10 @@ class _RequestsJoinScreenState extends State<RequestsJoinScreen>
       setState(() {});
 
     });
-    name = SharedPreferencesHelper.sharedPreferences!.getString("name")!;
-    email = SharedPreferencesHelper.sharedPreferences!.getString("email")!;
+     name = SharedPreferencesHelper.sharedPreferences!.getString("name")!;
+    //name = 'name';
+     email = SharedPreferencesHelper.sharedPreferences!.getString("email")!;
+    //email = 'email';
     super.initState();
   }
 

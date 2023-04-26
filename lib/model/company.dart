@@ -7,8 +7,9 @@ class Company {
   var rating;
   var email;
   var info;
+  var interestValue;
+  var state;
   var image;
-
   Company({this.name, this.description, this.location, this.rating});
 
   Company.fromJson(Map<String, dynamic> json) {
@@ -17,6 +18,8 @@ class Company {
     location = json['location'];
     rating = json['rating'];
     info = json['info'];
+    interestValue = json['interestValue'];
+    state = json['state'];
     image = json['image'];
   }
 }

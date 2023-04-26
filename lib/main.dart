@@ -7,9 +7,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:training_app/ui/onBoarding/onboarding_screen.dart';
 import 'package:training_app/ui/splash_screen.dart';
 import 'package:training_app/ui/student/chatbot_screen.dart';
+import 'package:training_app/ui/student/home_student.dart';
+import 'package:training_app/ui/student/jobs_screen.dart';
 import 'package:training_app/ui/student/search_screen.dart';
 import 'package:training_app/ui/training_organization/main_organization_screen.dart';
 import 'package:training_app/ui/training_organization/organization_edit_profile.dart';
+import 'package:training_app/ui/training_unit/Requests_join_screen.dart';
 import 'package:training_app/ui/training_unit/training_main_screen.dart';
 import 'package:training_app/ui/training_unit/unit_home_screen.dart';
 import 'controllers/shared_preference_controller.dart';
@@ -78,7 +81,7 @@ class _MyAppState extends State<MyApp> {
           // home: ProfileScreen(),
           //  home: AddNewCompany(),
           //  home: AddNewCompany(),
-           home: SearchScreen(),
+           home: StudentHome(),
         );
       }),
     );

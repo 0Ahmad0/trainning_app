@@ -17,6 +17,7 @@ class SecondStep extends StatefulWidget {
 
 class _SecondStepState extends State<SecondStep> {
   String interestValue = 'Information Technology';
+  String state = '0';
 
   TextEditingController nameController = TextEditingController();
 
@@ -124,6 +125,7 @@ class _SecondStepState extends State<SecondStep> {
                                   onChanged: (v) {
                                     setState(() {
                                       interestValue = v.toString();
+                                      state = '0';
                                     });
                                   }),
                             ),
@@ -144,6 +146,7 @@ class _SecondStepState extends State<SecondStep> {
                                 onChanged: (v) {
                                   setState(() {
                                     interestValue = v.toString();
+                                    state = '1';
                                   });
                                 },
                               ),
@@ -164,6 +167,7 @@ class _SecondStepState extends State<SecondStep> {
                                 onChanged: (v) {
                                   setState(() {
                                     interestValue = v.toString();
+                                    state = '2';
                                   });
                                 },
                               ),
@@ -185,6 +189,7 @@ class _SecondStepState extends State<SecondStep> {
                                 onChanged: (v) {
                                   setState(() {
                                     interestValue = v.toString();
+                                    state = '3';
                                   });
                                 },
                               ),
@@ -206,6 +211,7 @@ class _SecondStepState extends State<SecondStep> {
                                   onChanged: (v) {
                                     setState(() {
                                       interestValue = v.toString();
+                                      state = '4';
                                     });
                                   }),
                             ),
@@ -226,6 +232,7 @@ class _SecondStepState extends State<SecondStep> {
                                   onChanged: (v) {
                                     setState(() {
                                       interestValue = v.toString();
+                                      state = '5';
                                     });
                                   }),
                             ),
@@ -263,6 +270,8 @@ class _SecondStepState extends State<SecondStep> {
                         } else {
                           widget.newStudent.interest = interestValue.toString();
                           widget.newStudent.name = nameController.text;
+                          widget.newStudent.state = state.toString();
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PhoneNumberStep(

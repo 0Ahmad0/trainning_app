@@ -5,12 +5,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:training_app/controllers/shared_preference_controller.dart';
 import 'package:training_app/model/question.dart';
+import 'package:training_app/model/student.dart';
 import 'package:training_app/ui/student/main_screen.dart';
 import '../model/Faq.dart';
 import '../model/comment.dart';
 import '../model/company_request.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+class StudentController{
+  static Student student=Student();
+}
 Future<List<Question>> getChatBootQuestion() async {
   List<Question> questionList = [];
   await FirebaseFirestore.instance.collection("FAQ").get().then((value) {
@@ -225,7 +228,7 @@ Future<List<CompanyRequest>> getCompanyToStudent() async {
       .then((value) {
     for (var i in value.docs) {
       print(i.id);
-      if (i['status'] == '2') {
+      if (i['status'] == '2'&&i.data()['state']==StudentController.student.state) {
         companyRequest.add(
           CompanyRequest.fromJson(
             i.data(),
