@@ -23,19 +23,30 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
 
   List<CompanyRequest> companiesList = [];
-
-  searchCompany(String searchTerm) {
-    print(searchTerm);
-    FirebaseFirestore.instance
+  String searchTerm='';
+  Future fetchCompany() async {
+   return await FirebaseFirestore.instance
         .collection("companyRequests")
-        .where("name", isEqualTo: searchTerm)
         .get()
         .then((querySnapshot) {
+      companiesList.clear();
       querySnapshot.docs.forEach((result) {
         companiesList.add(CompanyRequest.fromJson(result.data(), result.id));
-        setState(() {});
+        //setState(() {});
       });
+  });
+  }
+  searchCompany(String searchTerm) async {
+    print(searchTerm);
+    List<CompanyRequest> tempCompanies=[];
+   return await fetchCompany().then((querySnapshot) {
+      for (var company in companiesList) {
+        if(company.name.toString().toLowerCase().contains(searchTerm.toLowerCase()))
+          tempCompanies.add(company);
+      }
+      companiesList=tempCompanies;
     });
+
   }
 
   @override
@@ -90,7 +101,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             border: InputBorder.none,
                             prefixIcon: InkWell(
                                 onTap: () {
-                                  searchCompany(searchController.text);
+                                  searchTerm=searchController.text;
+                                  setState(() {
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.search,
@@ -124,15 +137,33 @@ class _SearchScreenState extends State<SearchScreen> {
             height: 20,
           ),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: companiesList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ResultJobWidget(
-                  companyRequest: companiesList![index],
-                );
-              },
-            ),
+            child:  FutureBuilder(
+              //prints the messages to the screen0
+                future: searchCompany(searchTerm),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return
+
+                      Center(
+                          child: CircularProgressIndicator(
+                          ));
+
+                  }
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else  {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: companiesList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ResultJobWidget(
+                          companyRequest: companiesList![index],
+                        );
+                      },
+                    );
+                  }
+
+                })
           ),
         ],
       ),
