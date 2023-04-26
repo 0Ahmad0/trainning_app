@@ -23,6 +23,8 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
   bool? isLoading=false;
   String? name;
   String? interest;
+  String? state;
+
   String? isSendRequest;
 
   @override
@@ -30,6 +32,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
     super.initState();
     name = SharedPreferencesHelper.sharedPreferences!.getString('name');
     interest = SharedPreferencesHelper.sharedPreferences!.getString('interest');
+    state=StudentController.student.state;
     getUserData();
   }
  bool isHavExp=false;
@@ -159,6 +162,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                                       file: file!,
                                       name: name ?? "",
                                       interest: interest ?? "",
+                                    state: state??'0',
                                     context: context
                                   ).then((value){
                                    setState(() {

@@ -9,6 +9,7 @@ import 'package:training_app/model/student.dart';
 import 'package:training_app/ui/student/main_screen.dart';
 import '../model/Faq.dart';
 import '../model/comment.dart';
+import '../model/company.dart';
 import '../model/company_request.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StudentController{
@@ -62,6 +63,8 @@ editUserInfo(
         'phone': phone,
         // 'phone': '1234567890'
       }).then((value) {
+        StudentController.student.name=name;
+        StudentController.student.phone=phone;
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.successfullyUpdate)));
         Navigator.of(context).push(
@@ -92,6 +95,10 @@ editPersonalInfo({
         'gender': gender
         // 'phone': '1234567890'
       }).then((value) {
+        StudentController.student.dob=dob;
+        StudentController.student.city=city;
+        StudentController.student.nationality=nationality;
+        StudentController.student.gender=gender;
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.successfullyUpdate)));
         Navigator.of(context).push(
@@ -116,6 +123,7 @@ updateSkill({
         'skill': skill,
         // 'phone': '1234567890'
       }).then((value) {
+        StudentController.student.skill=skill;
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.successfullyUpdate)));
         Navigator.of(context).push(
@@ -143,6 +151,9 @@ updateLanguage(
         'other': other,
         // 'phone': '1234567890'
       }).then((value) {
+        StudentController.student.level=level;
+        StudentController.student.language=language;
+        StudentController.student.other=other;
         ScaffoldMessenger.of(context)
             .showSnackBar( SnackBar(content: Text(AppLocalizations.of(context)!.successfullyUpdate)));
         Navigator.of(context).push(
@@ -180,6 +191,7 @@ Future<bool?> uploadFile(
     {required File file,
     required String name,
     required String interest,
+      required String state,
     required BuildContext context}) async {
   var id = SharedPreferencesHelper.sharedPreferences!.getString('uid');
   var name = SharedPreferencesHelper.sharedPreferences!.getString('name');
@@ -193,6 +205,7 @@ Future<bool?> uploadFile(
     'name': name,
     'interest': interest,
     'status': '0',
+    'state':state,
     'id': id,
   }).then((value) async {
     final DocumentReference docRef =
@@ -221,16 +234,22 @@ Future<bool?> uploadFile(
 
 Future<List<CompanyRequest>> getCompanyToStudent() async {
   List<CompanyRequest> companyRequest = [];
+  List<Company> company = [];
 
   await FirebaseFirestore.instance
       .collection("companyRequests")
+    //  .collection("users")
       .get()
       .then((value) {
     for (var i in value.docs) {
-      print(i.id);
-      if (i['status'] == '2'&&i.data()['state']==StudentController.student.state) {
+      //print(i.id);
+
+      if (i['status'] == '2') {
+      //if (i['user_type'] == '2'&&i['state']==StudentController.student.state) {
+       // company.add(
         companyRequest.add(
           CompanyRequest.fromJson(
+         // Company.fromJson(
             i.data(),
             i.id,
           ),
@@ -240,6 +259,7 @@ Future<List<CompanyRequest>> getCompanyToStudent() async {
   });
 
   return companyRequest;
+ // return company;
 }
 
 sendComment(
@@ -445,7 +465,7 @@ Future<bool?> updateStudebtProfile(
           'img': downloadUrl,
           // 'phone': '1234567890'
         }).then((value) async {
-
+          StudentController.student.img=downloadUrl;
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text("تم التحديث بنجاح")));
           Navigator.of(context).pop();

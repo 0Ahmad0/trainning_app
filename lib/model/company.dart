@@ -10,10 +10,12 @@ class Company {
   var interest;
   var state;
   var image;
+  var id;
   Company({this.name, this.description, this.location, this.rating});
 
-  Company.fromJson(Map<String, dynamic> json) {
+  Company.fromJson(Map<String, dynamic> json,var documentId) {
     name = json['name'];
+    id =documentId;
     description = json['description'];
     location = json['location'];
     rating = json['rating'];

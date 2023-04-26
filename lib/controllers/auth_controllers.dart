@@ -145,7 +145,7 @@ signInWithEmailAndPassword(
               ),
             );
           } else if(value['user_type'] == '2'){
-            Company company = Company.fromJson(value.data()!);
+            Company company = Company.fromJson(value.data()!,value.id);
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('nameCom', company.name);
             /*await SharedPreferencesHelper.sharedPreferences!

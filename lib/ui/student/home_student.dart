@@ -26,7 +26,7 @@ class StudentHome extends StatefulWidget {
 
 class _StudentHomeState extends State<StudentHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<CompanyRequest> companiesList = [];
+  List companiesList = [];
 
   @override
   void initState() {
@@ -72,7 +72,13 @@ class _StudentHomeState extends State<StudentHome> {
                     onTap: () {
                       _scaffoldKey.currentState?.openDrawer();
                     },
-                    child: Image.asset(
+
+                    child:
+                    StudentController.student.img!=null? CircleAvatar(
+                          backgroundImage: NetworkImage(StudentController.student.img!),
+                        )
+                        :
+                    Image.asset(
                       'assets/profile_pic.png',
                       height: 30,
                     ),
@@ -159,10 +165,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   var name;
   var email;
+  var img;
  @override
   void initState() {
    name=  SharedPreferencesHelper.sharedPreferences!.getString("name")!;
    email=SharedPreferencesHelper.sharedPreferences!.getString("email")!;
+   img=StudentController.student.img;
     setState(() {
 
     });
@@ -179,6 +187,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         child: Column(children: [
           Row(
             children: [
+              img!=null? SizedBox(
+                height: 50,
+                 child: CircleAvatar(
+                    backgroundImage: NetworkImage(img!),
+                  )
+              )
+                  :
               Image.asset(
                 'assets/profile_pic.png',
                 height: 50,
