@@ -244,7 +244,8 @@ Future<List<CompanyRequest>> getCompanyToStudent() async {
     for (var i in value.docs) {
       //print(i.id);
 
-      if (i['status'] == '2') {
+      //if (i['status'] == '2') {
+      if (i['status'] == StudentController.student.state) {
       //if (i['user_type'] == '2'&&i['state']==StudentController.student.state) {
        // company.add(
         companyRequest.add(
