@@ -17,17 +17,18 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController(text: StudentController.student.name.toString());
 
-  TextEditingController phoneController = TextEditingController();
-  var email ="";
-  var name ="";
-  var img ="";
+  TextEditingController phoneController = TextEditingController(text: StudentController.student.phone);
+  TextEditingController emailController = TextEditingController(text: StudentController.student.email);
+  var email =StudentController.student.email.toString();
+  var name =StudentController.student.name.toString();
+  var img =null;
 @override
   void initState() {
-  name = SharedPreferencesHelper.sharedPreferences!.getString("name")!;
-  email = SharedPreferencesHelper.sharedPreferences!.getString("email")!;
-  img = StudentController.student.img;
+  name = StudentController.student.name.toString(); //SharedPreferencesHelper.sharedPreferences!.getString("name")!;
+  email =StudentController.student.email.toString();// SharedPreferencesHelper.sharedPreferences!.getString("email")!;
+  img = StudentController.student.img??null;
   super.initState();
 
 }

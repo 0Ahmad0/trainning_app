@@ -30,6 +30,7 @@ class AuthController {
       },
       verificationFailed: (authException) {
         print("Authentication failed");
+        //print(authException);
       },
       codeSent: (String verId, int? forceCodeResent) {
         print((verId));
@@ -59,17 +60,19 @@ class AuthController {
       verificationId: verificationId,
       smsCode: otp,
     ))
-        .then((value) {
-      FirebaseAuth.instance
+        .then((value) async {
+      await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
         email: student.email!,
         password: student.password!,
       ).then((user) async {
+
         FirebaseFirestore.instance.collection('users').doc(user.user?.uid).set({
           'email': user.user?.email,
           'phone': student.phone,
           'interest': student.interest,
           'name': student.name,
+          'status':student.state,
           'user_type':'1',
           'level':"",
           'language':"",
@@ -84,10 +87,16 @@ class AuthController {
         }).then((value) async {
           print(student.name);
           print(student.email);
+          print(student.phone);
+          StudentController.student=student;
+          await SharedPreferencesHelper.sharedPreferences!
+              .setString('interest', student.interest);
           await SharedPreferencesHelper.sharedPreferences!
               .setString('name', student.name);
           await SharedPreferencesHelper.sharedPreferences!
               .setString('email', student.email??"");
+          SharedPreferencesHelper.sharedPreferences!
+              .setString('uid',user.user!.uid);
         });
 
       }).catchError((error) {
@@ -148,22 +157,29 @@ signInWithEmailAndPassword(
             Company company = Company.fromJson(value.data()!,value.id);
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('nameCom', company.name);
+            await SharedPreferencesHelper.sharedPreferences!.setString("emailCom",email);
             /*await SharedPreferencesHelper.sharedPreferences!
                  .setString('emailCom', company.email);*/
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('info', company.info);
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('image', company.image);
+            SharedPreferencesHelper.sharedPreferences!
+                .setString('uid',result.user!.uid);
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => MainOrganizationScreen(),
               ),
             );
           }else {
+            Student student = Student.fromJson(value.data()!);
+            StudentController.student=student;
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('name', value['name']);
             await SharedPreferencesHelper.sharedPreferences!
                 .setString('email', value['email']);
+            SharedPreferencesHelper.sharedPreferences!
+                .setString('uid',result.user!.uid);
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const TrainingMainScreen(),

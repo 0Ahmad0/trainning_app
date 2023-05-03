@@ -30,7 +30,7 @@ class _HomeOrganizationScreenState extends State<HomeOrganizationScreen> {
       statusList = value;
       setState(() {});
     });
-    name = SharedPreferencesHelper.sharedPreferences!.getString("nameCom")!;
+    name = SharedPreferencesHelper.sharedPreferences!.getString("nameCom")??'';
     email = SharedPreferencesHelper.sharedPreferences!.getString("emailCom")??"";
     super.initState();
   }

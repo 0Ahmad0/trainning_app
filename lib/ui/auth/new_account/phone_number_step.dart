@@ -125,8 +125,8 @@ class PhoneNumberStep extends StatelessWidget {
                         title: AppLocalizations.of(context)!.register,
                         textColor: lightPink,
                         onclick: () {
-                          AuthController().verifyPoneNumber(context,
-                              "+966${phoneController.text}", newStudent);
+                          newStudent.phone="${phoneController.text}";
+                          AuthController().verifyPoneNumber(context, "+966${phoneController.text}", newStudent);
                           /* Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>  VerifyCodeScreen(),

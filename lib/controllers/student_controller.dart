@@ -467,10 +467,11 @@ Future<bool?> updateStudebtProfile(
           // 'phone': '1234567890'
         }).then((value) async {
           StudentController.student.img=downloadUrl;
+          Navigator.of(context).pop();
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text("تم التحديث بنجاح")));
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
+
+          //Navigator.of(context).pop();
 
         });
       }

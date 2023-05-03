@@ -35,14 +35,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   }
   Student? student;
-  String? studentName;
-  String? img;
+  String? studentName=StudentController.student.name;
+  String? img=StudentController.student.img;
   getUserData() async {
     String? uid=  SharedPreferencesHelper.sharedPreferences!
         .getString('uid');
     if(uid!=null){
      await FirebaseFirestore.instance.collection('users').doc(uid).get().then((value) {
         student = Student.fromJson(value.data()!);
+        StudentController.student=student!;
         if(student!.name!=""){
           studentName =student!.name;
 

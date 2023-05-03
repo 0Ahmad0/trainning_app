@@ -20,8 +20,10 @@ class Student {
 
   Student.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
     interest = json['interest'];
-    state = json['state'];
+    state = json['status'];
     isSendRequest = json['isSendRequest'];
     level = json['level'];
     language = json['language'];
@@ -32,7 +34,7 @@ class Student {
     nationality = json['nationality'];
     gender =json['gender'];
     exp=json['exp'];
-    img =json['img'];
+    img =json['img']==''?null:json['img'];
   }
 }
 
