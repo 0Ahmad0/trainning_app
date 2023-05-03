@@ -23,7 +23,7 @@ class Student {
     email = json['email'];
     phone = json['phone'];
     interest = json['interest'];
-    state = json['status'];
+    state = json['state'];
     isSendRequest = json['isSendRequest'];
     level = json['level'];
     language = json['language'];
