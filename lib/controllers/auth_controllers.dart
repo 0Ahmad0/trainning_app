@@ -72,7 +72,7 @@ class AuthController {
           'phone': student.phone,
           'interest': student.interest,
           'name': student.name,
-          'status':student.state,
+          'state':student.state,
           'user_type':'1',
           'level':"",
           'language':"",
